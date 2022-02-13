@@ -42,6 +42,21 @@ class Home extends React.Component{
       style={styles.header}
       >Explore Event</Text>
 
+    <View style={styles.filterContainer}>
+        <TouchableOpacity style={styles.filterButton}>
+        <Image
+        style={styles.list}
+        source={{uri:"https://cdn-icons.flaticon.com/png/512/1665/premium/1665684.png?token=exp=1644756560~hmac=01fb7e09ab15d9be4a1957972a7377a9"}}
+        />
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.filterButton}>
+        <Image
+        style={styles.grid}
+        source={{uri:"https://cdn-icons.flaticon.com/png/512/1665/premium/1665712.png?token=exp=1644757252~hmac=4a57cc9b084d257513d2ae4d76c4f9e6"}}
+        />
+        </TouchableOpacity>
+    </View>
       <Text
       style={styles.subHeader}
       >Featured Events</Text>
@@ -63,13 +78,43 @@ class Home extends React.Component{
 const styles = StyleSheet.create({
     container:{
         flex:1,
-        // padding:20,
-        backgroundColor:"#212121",
-        // height:'100%'
+        backgroundColor:"#333",
+    },
+    filterContainer:{
+        
+        flexDirection:'row',
+        justifyContent:'center'
+    },
+    filterButton:{
+        backgroundColor:'#333',
+        padding:20,
+        width:'20%',
+        alignSelf:'center',
+        borderRadius:9,
+        shadowColor: "#fff",
+        marginHorizontal:10,
+        shadowOffset: {
+            width: 0,
+            height: 12,
+        },
+        shadowOpacity: 0.58,
+        shadowRadius: 16.00,
+
+        elevation: 16
+    },
+    list:{
+        width:40,
+        height:40,
+        alignSelf:'center'
+    },
+    grid:{
+        width:40,
+        height:40,
+        alignSelf:'center'
     },
     cardContainer:{
         // width:'100%'
-        flex:1,
+        flex:3,
         marginHorizontal:10,
         padding:10,
         height:1
@@ -80,7 +125,7 @@ const styles = StyleSheet.create({
         color:"#fff", 
         fontSize:30, 
         fontWeight:'bold', 
-        marginBottom:"10%",
+        // marginBottom:"5%",
         padding:20
     },
     subHeader:{

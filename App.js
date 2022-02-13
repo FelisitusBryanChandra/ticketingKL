@@ -4,13 +4,12 @@ import * as React from 'react';
 import { View, Text } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-// import { createStore } from 'redux'
-// import { wrap } from 'jest-runtime/node_modules/@types/yargs';
-// import { connect } from 'react-redux';
 import { Provider } from 'react-redux';
+import {store} from './src/redux';
 import Register from './src/screens/Register';
 import Home from './src/screens/Home';
-import {store} from './src/redux';
+import TicketDetails from './src/screens/TicketDetails';
+import Profile from './src/screens/Profile';
 
 
 
@@ -28,6 +27,16 @@ export default () => (
         <Stack.Screen 
         name="Home" 
         component={Home}
+        options={{headerShown:false}} 
+        />
+        <Stack.Screen 
+        name="TicketDetails" 
+        component={TicketDetails}
+        options={{headerShown:false}} 
+        />
+        <Stack.Screen 
+        name="Profile" 
+        component={Profile}
         options={{headerShown:false}} 
         />
       </Stack.Navigator>

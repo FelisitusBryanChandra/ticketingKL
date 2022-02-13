@@ -27,6 +27,24 @@ initialState = {
                 address:'Links Brewery',
                 paid: '$$$',
               },
+              {
+                id: '4',
+                type: 'Seminar',
+                eventName:'Startup Meets',
+                image:'https://sanggabuana.ac.id/wp-content/uploads/2017/09/Medical-weed-business-seminar1.jpg',
+                date:'2 August 2022',
+                address:'Kanteerava Indoor Stadium',
+                paid: '$$$',
+              },
+              {
+                id: '5',
+                type: 'Party',
+                eventName:'Summer Noon Party',
+                image:'https://res.cloudinary.com/purnesh/image/upload/w_1080,f_auto/pool-party.jpg',
+                date:'5 September 2022',
+                address:'Kumara Park',
+                paid: '$$$',
+              },
     ]
 }
 
