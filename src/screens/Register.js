@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
-import { View, Text, Image, TouchableHighlight, FlatList, ScrollView, TouchableOpacity, StyleSheet, TextInput } from 'react-native';
-import { connect, useDispatch } from 'react-redux';
-
+import { View, Text, Image, TouchableHighlight, FlatList, ScrollView, TouchableOpacity, StyleSheet, TextInput, ToastAndroid } from 'react-native';
+import { connect, useDispatch, useSelector } from 'react-redux';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {createUser} from '../redux/action'
 
 class Register extends React.Component{
 
@@ -15,6 +16,8 @@ class Register extends React.Component{
         const dispatch = this.props.dispatch
         dispatch({type: 'SET_NAME', inputType: input, inputValue: value})
     }
+
+
 
     sendData=(value)=>{
         const dispatch = this.props.dispatch
@@ -41,10 +44,10 @@ class Register extends React.Component{
       onChangeText={value => this.onInputChange(value,'name')}
       value={this.props.DATA.name}
       />
-      <Text>{this.props.DATA.name}</Text>
+      {/* <Text>{this.props.DATA.name}</Text> */}
       <TouchableHighlight
       style={styles.button}
-        onPress={()=>this.sendData(this.props.DATA.name)}
+        onPress={()=>this.sendData(JSON.stringify(this.props.DATA.name))}
       >
         <Text style={styles.textButton}>Confirm</Text>
       </TouchableHighlight>
@@ -87,25 +90,27 @@ const styles = StyleSheet.create({
         paddingHorizontal:10
     },
     button:{
-        backgroundColor:"#0b60a1", 
+        backgroundColor:'#53ed72', 
         width:"30%", 
         height:"7%",
         alignSelf:'center', 
         marginVertical:50, 
-        borderRadius:8
+        borderRadius:18
     },
     textButton:{
         color:"#fff", 
         fontWeight:'bold',
         textAlign:"center", 
+        textAlignVertical:'center',
         marginTop:'10%',
-        fontSize:16
+        fontSize:18
     }
 })
 
 function mapStateToProps(state){
     return{
         DATA: state.registerReducer.form,
+        DATA2: state.registerReducer
     }
 }
 

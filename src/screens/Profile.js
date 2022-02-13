@@ -20,6 +20,7 @@ class Profile extends React.Component{
 
     render(){
         const name = this.props.route.params
+        console.log(name)
         return(
     <View style={styles.container}>
 

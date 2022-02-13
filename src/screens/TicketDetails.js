@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 class TicketDetails extends React.Component{
 render(){
-    const {image, type, eventName, date, paid, desc}= this.props.route.params
+    const {image, type, eventName, date, paid, desc, address}= this.props.route.params
     return(
         <View style={styles.container}>
             <Text style={styles.header}>Ticket Details</Text>
@@ -14,16 +14,17 @@ render(){
             />
                 
             <ScrollView>
-                <View style={{flexDirection:'row'}}>
-                    <View style={[styles.subContainer,{flex:5}]}>
+                <View style={{flexDirection:'row', alignItems:'center'}}>
+                    <View style={[styles.subContainer,{flex:10}]}>
                         <Text style={styles.type}>{type}</Text>
                         <Text style={styles.subheader}>{eventName}</Text>
                         <Text style={styles.date}>Date: {date}</Text>
+                        <Text style={styles.address}>{address}</Text>
                     </View>
-                    <View style={[styles.subContainer,{flex:1}]}>
+                    <View style={[styles.subContainer,{flex:4}]}>
                         <Text style={styles.paid}>{paid}</Text>
                         <TouchableOpacity style={styles.orderButton}>
-                            <Text style={styles.orderText}>Buy</Text>    
+                            <Text style={styles.orderText}>Track</Text>    
                         </TouchableOpacity>                   
                     </View>
                 </View>
@@ -69,6 +70,11 @@ const styles = StyleSheet.create({
     date:{
         color:"#fff"
     },
+    address:{
+        color:"#fff",
+        fontSize:16,
+        fontWeight:'bold'
+    },
     image:{
         width:'100%',
         height:'40%',
@@ -76,14 +82,16 @@ const styles = StyleSheet.create({
         marginVertical:'5%'
     },
     paid:{
-        color:'#000',
+        color:'#fff',
         fontSize:18,
         fontWeight:'bold',
-        // textAlign:'right',
-        backgroundColor:'#fff',
+        textAlign:'center',
+        backgroundColor:'#4f4f4f',
         padding:10,
         borderRadius:8,
-        right:10  
+        right:10,
+        opacity:.8
+
     },
     orderButton:{
         marginTop:'10%',
@@ -95,7 +103,8 @@ const styles = StyleSheet.create({
     orderText:{
         fontSize:18,
         fontWeight:'bold',
-        color:'#000' 
+        color:'#000',
+        textAlign:'center', 
     },
     button:{
         backgroundColor:"#0b60a1", 
