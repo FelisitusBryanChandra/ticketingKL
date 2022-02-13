@@ -1,8 +1,5 @@
 import React, {Component} from 'react';
 import { View, Text, Image, TouchableHighlight, FlatList, ScrollView, TouchableOpacity, StyleSheet } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { wrap } from 'jest-runtime/node_modules/@types/yargs';
 import { connect } from 'react-redux';
 
 
@@ -33,7 +30,6 @@ import { connect } from 'react-redux';
 
 class Home extends React.Component{
 
-    
 
     render(){
         return(
@@ -61,18 +57,28 @@ class Home extends React.Component{
       style={styles.subHeader}
       >Featured Events</Text>
 
+    <View>
         <FlatList
         horizontal={true}
         data={this.props.DATA}
         renderItem={renderItem}
         keyExtractor={item => item.id}
         />
-        <Text
-        style={styles.subHeader}
-        >Ap aja</Text>
     </View>
+
+    <TouchableOpacity
+    style={styles.profButton}
+    >
+        <Image
+        style={styles.prof}
+        source={{uri:'https://cdn-icons-png.flaticon.com/512/1177/1177568.png'}}
+        />
+    </TouchableOpacity>
+    </View>
+    
         );
     }
+    
 }
 
 const styles = StyleSheet.create({
@@ -81,17 +87,17 @@ const styles = StyleSheet.create({
         backgroundColor:"#333",
     },
     filterContainer:{
-        
+        // flex:1,
         flexDirection:'row',
         justifyContent:'center'
     },
     filterButton:{
-        backgroundColor:'#333',
+        backgroundColor:'#fff',
         padding:20,
         width:'20%',
         alignSelf:'center',
         borderRadius:9,
-        shadowColor: "#fff",
+        shadowColor: "#000",
         marginHorizontal:10,
         shadowOffset: {
             width: 0,
@@ -100,7 +106,7 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.58,
         shadowRadius: 16.00,
 
-        elevation: 16
+        elevation: 24
     },
     list:{
         width:40,
@@ -113,13 +119,9 @@ const styles = StyleSheet.create({
         alignSelf:'center'
     },
     cardContainer:{
-        // width:'100%'
-        flex:3,
         marginHorizontal:10,
         padding:10,
-        height:1
-        // justifyContent:'center',
-        // alignItems:'center'
+
     },
     header:{
         color:"#fff", 
@@ -172,12 +174,29 @@ const styles = StyleSheet.create({
         marginTop:155,
         borderRadius:8,
         opacity:0.8
-    }
+    },
+    profButton:{
+        backgroundColor:'#fff',
+        borderRadius:30,
+        // width:'20%',
+        padding:5,
+        margin:5,
+        left:10,
+        bottom:10,
+        position:'absolute',
+        alignSelf:'baseline'
+
+    },
+    prof:{
+        width:50,
+        height:50,
+        
+    },
 })
 
 function mapStateToProps(state){
     return{
-        DATA: state.TICKET
+        DATA: state.ticketReducer.TICKET
     }
 }
 

@@ -29,7 +29,7 @@ export default () => (
         component={Home}
         options={{headerShown:false}} 
         />
-        <Stack.Screen 
+        {/* <Stack.Screen 
         name="TicketDetails" 
         component={TicketDetails}
         options={{headerShown:false}} 
@@ -38,7 +38,7 @@ export default () => (
         name="Profile" 
         component={Profile}
         options={{headerShown:false}} 
-        />
+        /> */}
       </Stack.Navigator>
     </NavigationContainer>
     </Provider>

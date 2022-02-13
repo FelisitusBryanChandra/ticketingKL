@@ -1,4 +1,6 @@
-initialState = {
+import { combineReducers } from "redux"
+
+const initialStateTicket = {
     TICKET:[
         {
                 id: '1',
@@ -48,8 +50,45 @@ initialState = {
     ]
 }
 
-const reducer = (state = initialState, action) => {
-    return state;
-};
+const initialStateUser ={
+    USER:[
+    {
+        id:1,
+        name: 'Sarah',
+        ticketId:[1,2]
+    }
+]
+}
+
+const initialStateRegister = {
+    form:{name:''}
+}
+
+const userReducer = (state = initialStateUser, action) => {
+
+    return state
+}
+
+const ticketReducer = (state = initialStateTicket, action) => {
+    return state
+}
+
+const registerReducer = (state = initialStateRegister, action) => {
+    if(action.type === 'SET_NAME'){
+        return{
+            form:{
+                [action.inputType]: action.inputValue
+            }
+        }
+    }
+    return state
+}
+
+const reducer = combineReducers({
+    userReducer,
+    ticketReducer,
+    registerReducer
+});
+
 
 export default reducer;

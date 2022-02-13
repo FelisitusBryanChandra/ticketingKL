@@ -1,12 +1,31 @@
 import React, {Component} from 'react';
 import { View, Text, Image, TouchableHighlight, FlatList, ScrollView, TouchableOpacity, StyleSheet, TextInput } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { wrap } from 'jest-runtime/node_modules/@types/yargs';
-import { connect } from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
 
+
+
+// const onInputChange = (value, input) => {
+
+// }
+
+// const sendData =()=>{
+//     console.log('data sent: ', this.props.DATA.name)
+// }
 
 class Register extends React.Component{
+
+    sendData=()=>{
+        console.log('data sent: ', this.props.DATA)
+        this.props.navigation.navigate('Home');
+    }
+
+    dispatch=()=>{
+        useDispatch();
+    }
+
+    onInputChange = (value, input) => {
+        this.props.dispatch({type: 'SET_NAME', inputType: input, inputValue: value})
+    }
 
     render(){
         return(
@@ -20,12 +39,15 @@ class Register extends React.Component{
       <TextInput
       style={styles.textInput}
       placeholder="Enter your name here"
-      // onChangeText={onChangeText}
-      // value={text}
+      onChangeText={value => this.onInputChange(value,'name')}
+      value={this.props.DATA.name}
       />
+      <Text>{this.props.DATA.name}</Text>
       <TouchableHighlight
       style={styles.button}
-        onPress={() => this.props.navigation.navigate('Home')}
+        onPress={()=>this.sendData()}
+        //     // this.props.navigation.navigate('Home')
+        
       >
         <Text style={styles.textButton}>Confirm</Text>
       </TouchableHighlight>
@@ -85,7 +107,7 @@ const styles = StyleSheet.create({
 
 function mapStateToProps(state){
     return{
-        DATA: state.TICKET
+        DATA: state.registerReducer.form
     }
 }
 
