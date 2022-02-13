@@ -3,28 +3,27 @@ import { View, Text, Image, TouchableHighlight, FlatList, ScrollView, TouchableO
 import { connect, useDispatch } from 'react-redux';
 
 
-
-// const onInputChange = (value, input) => {
-
-// }
-
-// const sendData =()=>{
-//     console.log('data sent: ', this.props.DATA.name)
-// }
-
 class Register extends React.Component{
 
-    sendData=()=>{
-        console.log('data sent: ', this.props.DATA)
-        this.props.navigation.navigate('Home');
-    }
-
+    
     dispatch=()=>{
         useDispatch();
     }
 
+
     onInputChange = (value, input) => {
-        this.props.dispatch({type: 'SET_NAME', inputType: input, inputValue: value})
+        const dispatch = this.props.dispatch
+        dispatch({type: 'SET_NAME', inputType: input, inputValue: value})
+    }
+
+    sendData=(value)=>{
+        const dispatch = this.props.dispatch
+        const DATA = this.props.DATA
+        console.log('data sent: ', DATA)
+        this.props.navigation.navigate('Home', {
+            name: DATA.name
+        });
+        dispatch({type:'CONFIRM_NAME', inputValue: value})
     }
 
     render(){
@@ -45,9 +44,7 @@ class Register extends React.Component{
       <Text>{this.props.DATA.name}</Text>
       <TouchableHighlight
       style={styles.button}
-        onPress={()=>this.sendData()}
-        //     // this.props.navigation.navigate('Home')
-        
+        onPress={()=>this.sendData(this.props.DATA.name)}
       >
         <Text style={styles.textButton}>Confirm</Text>
       </TouchableHighlight>
@@ -72,7 +69,8 @@ const styles = StyleSheet.create({
     subheader:{
         color:"#fff", 
         fontSize:20, 
-        marginBottom:20
+        marginBottom:20,
+        fontWeight:'bold'
     },
     image:{
         width:'100%',
@@ -84,7 +82,7 @@ const styles = StyleSheet.create({
         height:40, 
         width:"100%", 
         backgroundColor:"#3d3d3d", 
-        borderRadius:5, 
+        borderRadius:10, 
         color:"#fff", 
         paddingHorizontal:10
     },
@@ -107,7 +105,7 @@ const styles = StyleSheet.create({
 
 function mapStateToProps(state){
     return{
-        DATA: state.registerReducer.form
+        DATA: state.registerReducer.form,
     }
 }
 

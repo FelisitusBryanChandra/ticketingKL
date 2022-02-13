@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-import { View, Text, Image, TouchableHighlight, FlatList, ScrollView, TouchableOpacity, StyleSheet, TextInput } from 'react-native';
+import React from 'react';
+import { Image, StyleSheet, Text, TextInput, TouchableHighlight, View } from 'react-native';
 import { connect, useDispatch } from 'react-redux';
 
 
@@ -19,9 +19,15 @@ class Profile extends React.Component{
     }
 
     render(){
+        const name = this.props.route.params
         return(
     <View style={styles.container}>
-      <Text style={styles.header}>Register Screen</Text>
+
+    <Text
+    style={styles.header}
+    >{name.name.name}</Text>
+
+      {/* <Text style={styles.header}>Register Screen</Text>
         <Image
         source={{uri:"https://cdn-icons-png.flaticon.com/512/3048/3048301.png"}}
         style={styles.image}
@@ -41,7 +47,7 @@ class Profile extends React.Component{
         
       >
         <Text style={styles.textButton}>Confirm</Text>
-      </TouchableHighlight>
+      </TouchableHighlight> */}
     </View>
         );
     }
@@ -52,13 +58,14 @@ const styles = StyleSheet.create({
     container:{
         flex:1,
         padding:20,
-        backgroundColor:"#212121"
+        backgroundColor:"#212121",
+        // justifyContent:'center',
     },
     header:{
         color:"#fff",
-        fontSize:30, 
+        fontSize:28, 
         fontWeight:'bold', 
-        // marginBottom:"%"
+        textAlign:'center'
     },
     subheader:{
         color:"#fff", 
@@ -102,4 +109,4 @@ function mapStateToProps(state){
     }
 }
 
-export default connect(mapStateToProps)(Register);
+export default connect(mapStateToProps)(Profile);

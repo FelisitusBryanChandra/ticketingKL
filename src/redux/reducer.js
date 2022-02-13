@@ -10,6 +10,7 @@ const initialStateTicket = {
                 date:'12 July 2022',
                 address: 'Palace Garden',
                 paid: '$$$',
+                desc:"It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)."
               },
               {
                 id: '2',
@@ -19,6 +20,7 @@ const initialStateTicket = {
                 date:'10 March 2022',
                 address:'Malleswaram Grounds',
                 paid: 'free',
+                desc:"It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)."
               },
               {
                 id: '3',
@@ -28,6 +30,7 @@ const initialStateTicket = {
                 date:'12 July 2022',
                 address:'Links Brewery',
                 paid: '$$$',
+                desc:"It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)."
               },
               {
                 id: '4',
@@ -37,6 +40,7 @@ const initialStateTicket = {
                 date:'2 August 2022',
                 address:'Kanteerava Indoor Stadium',
                 paid: '$$$',
+                desc:"It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)."
               },
               {
                 id: '5',
@@ -46,8 +50,11 @@ const initialStateTicket = {
                 date:'5 September 2022',
                 address:'Kumara Park',
                 paid: '$$$',
+                desc:"It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)."
               },
-    ]
+    ],
+    gridView: true,
+    image:'https://cdn-icons.flaticon.com/png/512/1665/premium/1665712.png?token=exp=1644757252~hmac=4a57cc9b084d257513d2ae4d76c4f9e6'
 }
 
 const initialStateUser ={
@@ -57,11 +64,15 @@ const initialStateUser ={
         name: 'Sarah',
         ticketId:[1,2]
     }
-]
+    ]
 }
 
 const initialStateRegister = {
-    form:{name:''}
+    form:[
+        {
+        name:''
+    }
+    ]
 }
 
 const userReducer = (state = initialStateUser, action) => {
@@ -70,15 +81,27 @@ const userReducer = (state = initialStateUser, action) => {
 }
 
 const ticketReducer = (state = initialStateTicket, action) => {
+    if(action.type === "CHANGE_FILTER"){
+        return {
+            ...state,
+            gridView:!state.gridView,
+        }
+    }
+
     return state
 }
 
-const registerReducer = (state = initialStateRegister, action) => {
+const registerReducer = (state = initialStateRegister, action   ) => {
     if(action.type === 'SET_NAME'){
         return{
             form:{
-                [action.inputType]: action.inputValue
-            }
+                [action.inputType]: action.inputValue,
+            },
+        }
+    }
+    if(action.type === 'CONFIRM_NAME'){
+        return{            
+            form:[action.inputValue]          
         }
     }
     return state

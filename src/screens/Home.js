@@ -4,32 +4,70 @@ import { connect } from 'react-redux';
 
 
   
-  const Item = ({ type, image, eventName, date, paid }) => (
-    <TouchableOpacity >
-        <View style={styles.cardContainer}>
-      <Image
-      style={styles.image}
-      source={{uri:image}}
-      />
-      <Text style={styles.type}>{type}</Text>
-      <Text style={styles.eventName}>{eventName}</Text>
-      <Text style={styles.date}>{date}</Text>
-      <Text style={styles.paid}>{paid}</Text>
-      </View>
-    </TouchableOpacity>
-  );
+//   const 
 
-  const renderItem = ({ item }) => (
-    <Item 
-    type={item.type}
-    image={item.image}
-    eventName={item.eventName}
-    date={item.date}
-    paid={item.paid} />  
-  );
+//   const
 
 class Home extends React.Component{
 
+    renderItem = (item) => (
+        <TouchableOpacity
+        onPress={()=> this.props.navigation.navigate('TicketDetails',{
+            image:item.image,
+            type: item.type,
+            eventName: item.eventName,
+            date: item.date,
+            paid: item.paid,
+            desc: item.desc
+        })}
+        >
+            <View style={styles.cardContainer}>
+          <Image
+          style={styles.image2}
+          source={{uri:item.image}}
+          />
+          <Text style={styles.type}>{item.type}</Text>
+          <Text style={styles.eventName}>{item.eventName}</Text>
+          <Text style={styles.date}>{item.date}</Text>
+          <Text style={styles.paid}>{item.paid}</Text>
+          </View>
+        </TouchableOpacity>
+      );
+
+    dispatch=()=>{
+        useDispatch();
+    }
+
+    constructor(){
+        super();
+        this.state={
+            // gridView: true,
+            image:'https://cdn-icons.flaticon.com/png/512/1665/premium/1665712.png?token=exp=1644757252~hmac=4a57cc9b084d257513d2ae4d76c4f9e6'
+        }
+    }
+
+    onPressFilter=()=>{
+    const gridView = this.props.DATA2.gridView    
+
+    const dispatch = this.props.dispatch
+    dispatch({type:"CHANGE_FILTER"})
+    console.log(gridView)
+    if(!gridView){
+        this.setState({image:'https://cdn-icons.flaticon.com/png/512/1665/premium/1665712.png?token=exp=1644757252~hmac=4a57cc9b084d257513d2ae4d76c4f9e6'})
+    }
+    else{
+        this.setState({image:'https://cdn-icons.flaticon.com/png/512/1665/premium/1665684.png?token=exp=1644756560~hmac=01fb7e09ab15d9be4a1957972a7377a9'})
+    }
+    }
+
+    onPressButton =()=>{
+        const name = this.props.route.params
+        const navigation = this.props.navigation
+        navigation.navigate('Profile',{
+            name: name
+        })
+        console.log(name)
+    }
 
     render(){
         return(
@@ -39,35 +77,33 @@ class Home extends React.Component{
       >Explore Event</Text>
 
     <View style={styles.filterContainer}>
-        <TouchableOpacity style={styles.filterButton}>
+        <TouchableOpacity 
+        style={styles.filterButton}
+        onPress={()=> this.onPressFilter()}
+        >
         <Image
         style={styles.list}
-        source={{uri:"https://cdn-icons.flaticon.com/png/512/1665/premium/1665684.png?token=exp=1644756560~hmac=01fb7e09ab15d9be4a1957972a7377a9"}}
-        />
-        </TouchableOpacity>
-
-        <TouchableOpacity style={styles.filterButton}>
-        <Image
-        style={styles.grid}
-        source={{uri:"https://cdn-icons.flaticon.com/png/512/1665/premium/1665712.png?token=exp=1644757252~hmac=4a57cc9b084d257513d2ae4d76c4f9e6"}}
+        source={{uri:this.state.image}}
         />
         </TouchableOpacity>
     </View>
+    
       <Text
       style={styles.subHeader}
       >Featured Events</Text>
 
-    <View>
+    <View style={{alignItems:'center'}}>
         <FlatList
-        horizontal={true}
+        horizontal={this.props.DATA2.gridView}
         data={this.props.DATA}
-        renderItem={renderItem}
+        renderItem={({item})=>this.renderItem(item)}
         keyExtractor={item => item.id}
         />
     </View>
 
     <TouchableOpacity
     style={styles.profButton}
+    onPress={()=> this.onPressButton()}
     >
         <Image
         style={styles.prof}
@@ -75,7 +111,6 @@ class Home extends React.Component{
         />
     </TouchableOpacity>
     </View>
-    
         );
     }
     
@@ -90,6 +125,12 @@ const styles = StyleSheet.create({
         // flex:1,
         flexDirection:'row',
         justifyContent:'center'
+    },
+    filterOn:{
+        opacity:0
+    },
+    filterOff:{
+        opacity:1
     },
     filterButton:{
         backgroundColor:'#fff',
@@ -121,7 +162,6 @@ const styles = StyleSheet.create({
     cardContainer:{
         marginHorizontal:10,
         padding:10,
-
     },
     header:{
         color:"#fff", 
@@ -137,6 +177,12 @@ const styles = StyleSheet.create({
         padding:20
     },
     image:{
+        width:300,
+        height:400,
+        borderRadius:10,
+        opacity:0.7
+    },
+    image2:{
         width:300,
         height:200,
         borderRadius:10,
@@ -196,7 +242,8 @@ const styles = StyleSheet.create({
 
 function mapStateToProps(state){
     return{
-        DATA: state.ticketReducer.TICKET
+        DATA: state.ticketReducer.TICKET,
+        DATA2: state.ticketReducer
     }
 }
 
