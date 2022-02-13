@@ -85,7 +85,7 @@ const styles = StyleSheet.create({
 
 function mapStateToProps(state){
     return{
-        DATA: state.type
+        DATA: state.TICKET
     }
 }
 

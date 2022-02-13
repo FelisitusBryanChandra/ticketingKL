@@ -1,5 +1,5 @@
 initialState = {
-    DATA:[
+    TICKET:[
         {
                 id: '1',
                 type: 'Concert',
@@ -22,7 +22,7 @@ initialState = {
                 id: '3',
                 type: 'Event',
                 eventName:'Wine Tasting',
-                image:'https://www.nadanadi.com/wp-content/uploads/2019/04/metallica1.jpg',
+                image:'https://yukorder.com/wp-content/uploads/2019/10/Tentang-Wine-Red-Wine-e1571388879216.jpg',
                 date:'12 July 2022',
                 address:'Links Brewery',
                 paid: '$$$',
