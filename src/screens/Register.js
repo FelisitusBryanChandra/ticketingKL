@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { View, Text, Image, TouchableHighlight, FlatList, ScrollView, TouchableOpacity, StyleSheet, TextInput, ToastAndroid } from 'react-native';
+import { View, Text, Image, TouchableHighlight, FlatList, ScrollView, TouchableOpacity, StyleSheet, TextInput, ToastAndroid, Alert } from 'react-native';
 import { connect, useDispatch, useSelector } from 'react-redux';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {createUser} from '../redux/action'
@@ -20,14 +20,27 @@ class Register extends React.Component{
 
 
     sendData=(value)=>{
+
         const dispatch = this.props.dispatch
         const DATA = this.props.DATA
-        console.log('data sent: ', DATA)
+
+
+        if(value == undefined || DATA.name == undefined){
+            Alert.alert('Alert', 'Please fill in your name!');
+            return;
+        }
+        if(value == "" || DATA.name == ""){
+            Alert.alert('Alert', 'Please fill in your name!');
+            return;
+        }
+
         this.props.navigation.navigate('Home', {
             name: DATA.name
         });
         dispatch({type:'CONFIRM_NAME', inputValue: value})
     }
+    
+    
 
     render(){
         return(
@@ -42,9 +55,8 @@ class Register extends React.Component{
       style={styles.textInput}
       placeholder="Enter your name here"
       onChangeText={value => this.onInputChange(value,'name')}
-      value={this.props.DATA.name}
+    //   value={}
       />
-      {/* <Text>{this.props.DATA.name}</Text> */}
       <TouchableHighlight
       style={styles.button}
         onPress={()=>this.sendData(JSON.stringify(this.props.DATA.name))}

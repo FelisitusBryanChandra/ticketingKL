@@ -67,8 +67,10 @@ class Home extends React.Component{
     }
 
     render(){
+
         const name = this.props.route.params
         console.log("Name is", name.name)
+
         return(
     <View style={styles.container}>
       <Text
@@ -103,9 +105,7 @@ class Home extends React.Component{
         </ScrollView>
 
     <TouchableOpacity
-    style={styles.profButton}
-    onPress={()=> this.onPressButton()}
-    >
+    style={styles.profButton}>
         <Image
         style={styles.prof}
         source={{uri:'https://cdn-icons-png.flaticon.com/512/1177/1177568.png'}}
