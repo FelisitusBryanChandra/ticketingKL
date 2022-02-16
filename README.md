@@ -100,16 +100,20 @@ To install all the dependencies and libraries, do install all the npm from the p
 
 ### Installation
 
-_Below is an example of how you can instruct your audience on installing and setting up your app. This template doesn't rely on any external dependencies or services._
+Below is the instructions how to install the application to your code editor.
 
 1. Clone the repo
    ```sh
    git clone https://github.com/FelisitusBryanChandra/ticketingKL.git
    ```
-3. Install NPM packages
+2. Install NPM packages
    ```sh
    npm install
    ```
+3. Run android emulator
+   ```sh
+   npx react-native run-android
+   ```  
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
