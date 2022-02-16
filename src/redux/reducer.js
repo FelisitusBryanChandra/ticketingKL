@@ -149,9 +149,7 @@ const registerReducer = (state = initialStateRegister, action   ) => {
             }
         case 'CONFIRM_NAME':
             return{            
-                form:action.inputValue,
-                // name:[state.name + action.inputValue]
-                // form: state.form.concat({id:Math.random(), name:state.name + action.inputValue})         
+                form: action.inputValue,        
             }
         default:
             return state;
